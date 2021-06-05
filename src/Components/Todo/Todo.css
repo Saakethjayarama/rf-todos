@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap");
+
+.Todo {
+  height: 100px;
+}
+
+.Todo__container {
+  padding: 20px;
+  margin: 5px 0px;
+  width: 75vw;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.Todo__container__task {
+  font-family: "Dancing Script", cursive;
+  font-size: 25px;
+}
+
+.Todo__container__action {
+  display: none;
+  align-self: flex-end;
+}
+
+.Todo__container:hover {
+  background-color: rgba(199, 199, 62, 0.319);
+}
+
+.Todo__container:hover .Todo__container__action {
+  display: block;
+}
+
+@media screen and (min-width: 992px) {
+  .Todo__container {
+    width: 50vw;
+  }
+}
