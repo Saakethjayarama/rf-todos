@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
+import { addTask } from "../../Firebase";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -25,22 +26,35 @@ const useStyles = makeStyles((theme) => {
 function TodoForm() {
   const classes = useStyles();
 
+  const [task, setTask] = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addTask(task, () => {
+      setTask("");
+    });
+  };
+
   return (
     <div className={classes.form}>
-      <TextField
-        id="outlined-basic"
-        label="Todo"
-        variant="outlined"
-        className={classes.tb}
-      />
-      <Button
-        variant="contained"
-        size="large"
-        color="primary"
-        className={classes.btn}
-      >
-        ADD
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          id="outlined-basic"
+          label="Todo"
+          variant="outlined"
+          className={classes.tb}
+          onChange={(event) => setTask(event.target.value)}
+          value={task}
+          required
+        />
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          className={classes.btn}
+        >
+          ADD
+        </Button>
+      </form>
     </div>
   );
 }

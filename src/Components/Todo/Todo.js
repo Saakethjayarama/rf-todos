@@ -3,7 +3,7 @@ import "./Todo.css";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { makeStyles } from "@material-ui/core";
-import Firebase from "../../Firebase";
+import { aeditTask, deleteTask } from "../../Firebase";
 
 const useStyles = makeStyles((theme) => ({
   actionBtns: {
@@ -23,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Todo({ id, task }) {
   const classes = useStyles();
-
-  const fb = new Firebase();
-  console.log(fb.config);
 
   const handleDelete = () => {
     console.log("Entered Delete");
