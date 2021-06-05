@@ -6,6 +6,7 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { makeStyles, Snackbar } from "@material-ui/core";
 import { editTask, deleteTask, taskComplete } from "../../Firebase";
+import Modal from "../../common/Modal";
 
 const useStyles = makeStyles((theme) => ({
   actionBtns: {
@@ -36,8 +37,10 @@ function Todo({ id, task, done }) {
     deleteTask(id);
   };
 
+  const [show, setShow] = useState(false);
   const handleEdit = () => {
     console.log("Entered Edit");
+    setShow(true);
   };
 
   const handleDone = () => {
@@ -55,6 +58,13 @@ function Todo({ id, task, done }) {
         autoHideDuration={6000}
         onClose={() => setOpen(false)}
         message={message}
+      />
+      <Modal
+        show={show}
+        handleClose={() => setShow(false)}
+        task={task}
+        id={id}
+        done={done}
       />
       <div className="Todo__container">
         <div

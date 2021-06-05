@@ -15,7 +15,7 @@ const listen = (callback) => {
   return listener;
 };
 
-const editTask = (id, task, callback = () => {}) => {
+const editTask = (id, task, done, callback = () => {}) => {
   db.ref(`tasks/${id}/`)
     .set({ task })
     .then(() => callback());
