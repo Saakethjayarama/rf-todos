@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Todo.css";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import { makeStyles } from "@material-ui/core";
-import { aeditTask, deleteTask } from "../../Firebase";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import { makeStyles, Snackbar } from "@material-ui/core";
+import { editTask, deleteTask, taskComplete } from "../../Firebase";
 
 const useStyles = makeStyles((theme) => ({
   actionBtns: {
@@ -19,24 +21,58 @@ const useStyles = makeStyles((theme) => ({
       color: "red",
     },
   },
+  striked: {
+    textDecoration: "line-through",
+  },
 }));
 
-function Todo({ id, task }) {
+function Todo({ id, task, done }) {
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("Done");
+
   const handleDelete = () => {
-    console.log("Entered Delete");
+    deleteTask(id);
   };
 
   const handleEdit = () => {
     console.log("Entered Edit");
   };
 
+  const handleDone = () => {
+    taskComplete(id, task, !done);
+  };
+
   return (
     <div className="Todo">
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+        message={message}
+      />
       <div className="Todo__container">
-        <div className="Todo__container__task">This is todo</div>
+        <div
+          className={
+            done
+              ? `Todo__container__task ${classes.striked}`
+              : `Todo__container__task`
+          }
+        >
+          {task}
+        </div>
         <div className="Todo__container__action">
+          {done ? (
+            <CheckCircleIcon onClick={handleDone} />
+          ) : (
+            <CheckCircleOutlineIcon onClick={handleDone} />
+          )}
+
           <EditIcon
             onClick={handleEdit}
             className={`${classes.actionBtns} ${classes.editBtn}`}

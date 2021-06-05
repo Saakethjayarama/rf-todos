@@ -4,6 +4,7 @@ const addTask = (task, callback) => {
   db.ref("tasks")
     .push({
       task,
+      done: false,
     })
     .then(() => callback());
 };
@@ -14,12 +15,22 @@ const listen = (callback) => {
   return listener;
 };
 
-const editTask = (id, task) => {
-  db.ref(`tasks/${id}/`).set({ task });
+const editTask = (id, task, callback) => {
+  db.ref(`tasks/${id}/`)
+    .set({ task })
+    .then(() => callback());
 };
 
-const deleteTask = (id) => {
-  db.ref(`tasks/${id}/`).set({});
+const taskComplete = (id, task, status, callback) => {
+  db.ref(`tasks/${id}/`)
+    .set({ task, done: status })
+    .then(() => callback);
 };
 
-export { addTask, listen, editTask, deleteTask };
+const deleteTask = (id, callback) => {
+  db.ref(`tasks/${id}/`)
+    .set({})
+    .then(() => callback());
+};
+
+export { addTask, listen, editTask, deleteTask, taskComplete };
