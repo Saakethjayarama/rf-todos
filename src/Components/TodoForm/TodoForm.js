@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, makeStyles } from "@material-ui/core";
 import { addTask } from "../../Firebase";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -31,11 +32,24 @@ function TodoForm() {
     event.preventDefault();
     addTask(task, () => {
       setTask("");
+      setOpen(true);
     });
   };
 
+  const [open, setOpen] = useState(false);
+
   return (
     <div className={classes.form}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+        message="Added!"
+      />
       <form onSubmit={handleSubmit}>
         <TextField
           id="outlined-basic"
@@ -51,6 +65,7 @@ function TodoForm() {
           size="large"
           color="primary"
           className={classes.btn}
+          onClick={handleSubmit}
         >
           ADD
         </Button>
