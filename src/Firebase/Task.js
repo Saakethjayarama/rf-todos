@@ -1,6 +1,6 @@
 import { db } from "./Firebase";
 
-const addTask = (task, callback) => {
+const addTask = (task, callback = () => {}) => {
   db.ref("tasks")
     .push({
       task,
@@ -15,19 +15,19 @@ const listen = (callback) => {
   return listener;
 };
 
-const editTask = (id, task, callback) => {
+const editTask = (id, task, callback = () => {}) => {
   db.ref(`tasks/${id}/`)
     .set({ task })
     .then(() => callback());
 };
 
-const taskComplete = (id, task, status, callback) => {
+const taskComplete = (id, task, status, callback = () => {}) => {
   db.ref(`tasks/${id}/`)
     .set({ task, done: status })
-    .then(() => callback);
+    .then(() => callback());
 };
 
-const deleteTask = (id, callback) => {
+const deleteTask = (id, callback = () => {}) => {
   db.ref(`tasks/${id}/`)
     .set({})
     .then(() => callback());
