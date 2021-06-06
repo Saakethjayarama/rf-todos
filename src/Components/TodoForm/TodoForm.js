@@ -9,10 +9,12 @@ const useStyles = makeStyles((theme) => {
       marginBottom: theme.spacing(5),
     },
     tb: {
-      width: theme.spacing(37),
+      width: theme.spacing(35),
+
       [theme.breakpoints.up("sm")]: {
         width: theme.spacing(45),
       },
+
       [theme.breakpoints.up("md")]: {
         width: theme.spacing(75),
       },
