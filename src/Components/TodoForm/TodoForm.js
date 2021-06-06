@@ -32,6 +32,7 @@ function TodoForm() {
   const [task, setTask] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (task == "") return;
     addTask(task, () => {
       setTask("");
       setOpen(true);
