@@ -1,0 +1,11 @@
+.Footer {
+  text-align: center;
+  padding: 15px 0px;
+  box-shadow: 0px 4px 10px;
+  transition: all ease-in-out 0.4s;
+  cursor: pointer;
+}
+
+.Footer:hover {
+  box-shadow: 0px 0px 10px;
+}

@@ -1,6 +1,14 @@
+.App__container {
+  min-height: 100vh;
+}
+
 .App__body {
   margin: 0px 10vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
