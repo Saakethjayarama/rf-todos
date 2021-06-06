@@ -4,8 +4,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import { makeStyles, Snackbar } from "@material-ui/core";
-import { editTask, deleteTask, taskComplete } from "../../Firebase";
+import { makeStyles } from "@material-ui/core";
+import { deleteTask, taskComplete } from "../../Firebase";
 import Modal from "../../common/Modal";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,16 +30,12 @@ const useStyles = makeStyles((theme) => ({
 function Todo({ id, task, done }) {
   const classes = useStyles();
 
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("Done");
-
   const handleDelete = () => {
     deleteTask(id);
   };
 
   const [show, setShow] = useState(false);
   const handleEdit = () => {
-    console.log("Entered Edit");
     setShow(true);
   };
 
@@ -49,16 +45,6 @@ function Todo({ id, task, done }) {
 
   return (
     <div className="Todo">
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-        message={message}
-      />
       <Modal
         show={show}
         handleClose={() => setShow(false)}
